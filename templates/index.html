@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student App for Forceps Finding room</title>
+    <style>
+        * {
+          box-sizing: border-box;
+          margin: 0;
+          padding: 0;
+        }
+
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f0f8ff;
+          color: #333;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          min-height: 100vh;
+        }
+
+        .container {
+          max-width: 800px;
+          margin: 40px auto;
+          padding: 30px;
+          background-color: #fff;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+          border-radius: 8px;
+          text-align: center;
+        }
+
+        h1 {
+          color: #1e90ff;
+          margin-bottom: 20px;
+          font-size: 24px;
+        }
+
+        .search-bar {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          margin-bottom: 20px;
+        }
+
+        .search-bar input[type="text"] {
+          width: 100%;
+          padding: 15px;
+          border: 1px solid #1e90ff;
+          border-radius: 4px;
+          outline: none;
+          font-size: 18px;
+          margin-bottom: 10px; /* Added padding */
+        }
+
+        .search-bar button {
+          padding: 15px 20px;
+          border: none;
+          background-color: #1e90ff;
+          color: white;
+          cursor: pointer;
+          border-radius: 4px;
+          width: 100%;
+          font-size: 18px;
+        }
+
+        .search-bar button:hover {
+          background-color: #104e8b;
+        }
+
+        table {
+          width: 100%;
+          border-collapse: collapse;
+          margin-top: 20px;
+        }
+
+        th, td {
+          padding: 15px;
+          border: 1px solid #ddd;
+          text-align: left;
+        }
+
+        th {
+          background-color: #1e90ff;
+          color: white;
+        }
+
+        tr:nth-child(even) {
+          background-color: #f2f2f2;
+        }
+
+        tr:hover {
+          background-color: #ddd;
+        }
+
+        /* Responsive design */
+
+        @media (max-width: 768px) {
+          .container {
+            max-width: 600px;
+            padding: 20px;
+          }
+
+          .search-bar input[type="text"] {
+            font-size: 16px;
+          }
+
+          .search-bar button {
+            font-size: 16px;
+          }
+
+          th, td {
+            padding: 10px;
+            font-size: 14px;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .container {
+            max-width: 400px;
+            padding: 15px;
+          }
+
+          .search-bar input[type="text"] {
+            font-size: 14px;
+          }
+
+          .search-bar button {
+            font-size: 14px;
+          }
+
+          th, td {
+            padding: 8px;
+            font-size: 12px;
+          }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Search For Student Room number</h1>
+        <form method="get" action="/search" class="search-bar">
+            <input type="text" name="query" placeholder="Search by name" value="{{ query }}">
+            <button type="submit">Search</button>
+        </form>
+
+        {% if results %}
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Registration Number</th>
+                    <th>Room Number</th>
+                    <th>Stream</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for result in results %}
+                <tr>
+                    <td>{{ result.Name }}</td>
+                    <td>{{ result.RegistrationNumber }}</td>
+                    <td>{{ result.RoomNumber }}</td>
+                    <td>{{ result.Stream }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        {% endif %}
+    </div>
+</body>
+</html>
